@@ -35,7 +35,65 @@ class GFG {
 
 
 class Solution {
-    static class Pair{
+   public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj) {
+    int vis[] = new int[V];
+    for(int i=0;i<V;i++)
+    {
+        if(vis[i] == 0)
+        {
+            if(checkCycle(V,adj,vis,i,-1)) return true;
+        }
+    }
+    return false;
+}
+public boolean checkCycle(int V, ArrayList<ArrayList<Integer>> adj,int[] vis,int node,int parent)
+{
+    vis[node] = 1;
+    for(int adjnode : adj.get(node))
+    {
+        if(vis[adjnode] == 0)
+        {
+            if(checkCycle(V,adj,vis,adjnode,node)) return true;
+        }
+        else if(parent != adjnode) return true;
+    }
+    return false;
+}
+
+}
+
+
+/*
+public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj) {
+    int vis[] = new int[V];
+    for(int i=0;i<V;i++)
+    {
+        if(vis[i] == 0)
+        {
+            if(checkCycle(V,adj,vis,i,-1)) return true;
+        }
+    }
+    return false;
+}
+public boolean checkCycle(int V, ArrayList<ArrayList<Integer>> adj,int vis,int node,int parent)
+{
+    vis[i] = 1;
+    for(int adjnode : adj.get(node))
+    {
+        if(vis[node] == 0)
+        {
+            if(checkCycle(V,adj,vis,adjnode,node)) return true;
+        }
+        else if(parent != adjnode) return true;
+    }
+    return false;
+}
+
+*/
+
+
+/*
+static class Pair{
         int node,parent;
         Pair(int node,int parent)
         {
@@ -82,4 +140,4 @@ class Solution {
         }
         return false;
     }
-}
+*/
